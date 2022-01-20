@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+ACCOUNTS<br>
+<a href="{% url 'new-institution' %}">Add institution</a><br>
+{% if accounts %}
+<table>
+{% for account in accounts %}
+<tr>
+    <td><b><a href="{% url 'account-transactions' account_id=account.id %}">{{ account.iban }}</a></b></td>
+    <td>{% if account.balance is not None %}{{ account.balance }} {{ account.currency }}{% endif %}</td>
+</tr>
+</table>
+{% endfor %}
+{% endif %}
+{% endblock %}

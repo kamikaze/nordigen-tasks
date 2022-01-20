@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block body %}
+ACCOUNT TRANSACTIONS<br>
+<table>
+{% for transaction in transactions %}
+<tr>
+    <td>{{ transaction.booking_date }}</td>
+    <td>{{ transaction.creditor_name | default_if_none:"" }}</td>
+    <td>{{ transaction.debtor_name | default_if_none:"" }}</td>
+    <td>{{ transaction.amount }}</td>
+    <td>{{ transaction.currency }}</td>
+{% endfor %}
+</table>
+{% endblock %}

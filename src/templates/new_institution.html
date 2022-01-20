@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block body %}
+<link href="https://unpkg.com/nordigen-bank-ui@1.0.1/package/src/selector.min.css" rel="stylesheet" />
+<div class="institution-content-wrapper">
+    <div id="institution-modal-content">
+        <header class="institution-modal-header ">
+            <span class="institution-modal-close">&times;</span>
+            <h2>Select your bank:</h2>
+        </header>
+    </div>
+</div>
+<script src="https://unpkg.com/nordigen-bank-ui@1.0.1/package/src/selector.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    const institutions = {{ institutions | safe }};
+    const config = {
+        redirectUrl: 'https://ob.nordigen.com/',
+        logoUrl: 'https://cdn.nordigen.com/ais/Nordigen_Logo_Black.svg'
+    };
+    institutionSelector(institutions, 'institution-modal-content', config);
+    $("a").click(function() {
+        const institutionId = $(this).data("institution");
+        location.href=`/magic/institutions/${institutionId}/connect`;
+    });
+</script>
+{% endblock %}
